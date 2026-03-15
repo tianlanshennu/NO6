@@ -13,16 +13,16 @@ public interface TongzhijiluService extends IService<TongzhijiluEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
     
-   	List<TongzhijiluView> selectListView(Wrapper<TongzhijiluEntity> wrapper);
-   	
-   	TongzhijiluView selectView(@Param("ew") Wrapper<TongzhijiluEntity> wrapper);
-   	
-   	PageUtils queryPage(Map<String, Object> params,Wrapper<TongzhijiluEntity> wrapper);
-   	
-   	List<TongzhijiluEntity> selectListByStatus(String fasongzhuangtai);
-   	
-   	void updateRetryCount(Long id, Integer retryCount, String failReason);
-   	
-   	void updateSendStatus(Long id, String status);
+    List<TongzhijiluView> selectListView(Wrapper<TongzhijiluEntity> wrapper);
+    
+    TongzhijiluView selectView(@Param("ew") Wrapper<TongzhijiluEntity> wrapper);
+    
+    PageUtils queryPage(Map<String, Object> params, Wrapper<TongzhijiluEntity> wrapper);
+    
+    List<TongzhijiluEntity> selectListByStatus(String fasongzhuangtai);
+    
+    void updateRetryCount(Long id, Integer retryCount, String failReason);
+    
+    void updateSendStatus(Long id, String status);
 
 }

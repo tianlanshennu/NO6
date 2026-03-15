@@ -29,47 +29,47 @@ public class TongzhijiluServiceImpl extends ServiceImpl<TongzhijiluDao, Tongzhij
     }
     
     @Override
-	public PageUtils queryPage(Map<String, Object> params, Wrapper<TongzhijiluEntity> wrapper) {
-		Page<TongzhijiluView> page =new Query<TongzhijiluView>(params).getPage();
-        page.setRecords(baseMapper.selectListView(page,wrapper));
-    	PageUtils pageUtil = new PageUtils(page);
-    	return pageUtil;
- 	}
+    public PageUtils queryPage(Map<String, Object> params, Wrapper<TongzhijiluEntity> wrapper) {
+        Page<TongzhijiluView> page = new Query<TongzhijiluView>(params).getPage();
+        page.setRecords(baseMapper.selectListView(page, wrapper));
+        PageUtils pageUtil = new PageUtils(page);
+        return pageUtil;
+    }
     
-	@Override
-	public List<TongzhijiluView> selectListView(Wrapper<TongzhijiluEntity> wrapper) {
-		return baseMapper.selectListView(wrapper);
-	}
+    @Override
+    public List<TongzhijiluView> selectListView(Wrapper<TongzhijiluEntity> wrapper) {
+        return baseMapper.selectListView(wrapper);
+    }
 
-	@Override
-	public TongzhijiluView selectView(Wrapper<TongzhijiluEntity> wrapper) {
-		return baseMapper.selectView(wrapper);
-	}
-	
-	@Override
-	public List<TongzhijiluEntity> selectListByStatus(String fasongzhuangtai) {
-		return this.selectList(new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", fasongzhuangtai));
-	}
-	
-	@Override
-	public void updateRetryCount(Long id, Integer retryCount, String failReason) {
-		TongzhijiluEntity entity = new TongzhijiluEntity();
-		entity.setId(id);
-		entity.setChongshicishu(retryCount);
-		entity.setShibaiyuanyin(failReason);
-		entity.setChongshishijian(new java.util.Date());
-		this.updateById(entity);
-	}
-	
-	@Override
-	public void updateSendStatus(Long id, String status) {
-		TongzhijiluEntity entity = new TongzhijiluEntity();
-		entity.setId(id);
-		entity.setFasongzhuangtai(status);
-		if ("成功".equals(status)) {
-			entity.setChongshishijian(new java.util.Date());
-		}
-		this.updateById(entity);
-	}
+    @Override
+    public TongzhijiluView selectView(Wrapper<TongzhijiluEntity> wrapper) {
+        return baseMapper.selectView(wrapper);
+    }
+    
+    @Override
+    public List<TongzhijiluEntity> selectListByStatus(String fasongzhuangtai) {
+        return this.selectList(new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", fasongzhuangtai));
+    }
+    
+    @Override
+    public void updateRetryCount(Long id, Integer retryCount, String failReason) {
+        TongzhijiluEntity entity = new TongzhijiluEntity();
+        entity.setId(id);
+        entity.setChongshicishu(retryCount);
+        entity.setShibaiyuanyin(failReason);
+        entity.setChongshishijian(new java.util.Date());
+        this.updateById(entity);
+    }
+    
+    @Override
+    public void updateSendStatus(Long id, String status) {
+        TongzhijiluEntity entity = new TongzhijiluEntity();
+        entity.setId(id);
+        entity.setFasongzhuangtai(status);
+        if ("成功".equals(status)) {
+            entity.setChongshishijian(new java.util.Date());
+        }
+        this.updateById(entity);
+    }
 
 }

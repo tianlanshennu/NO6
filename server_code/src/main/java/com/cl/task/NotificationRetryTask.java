@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.cl.service.NotificationService;
 import com.cl.service.TongzhijiluService;
 import com.cl.entity.TongzhijiluEntity;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class NotificationRetryTask {
 
     @Scheduled(fixedRate = 60000)
     public void retryFailedNotifications() {
-        EntityWrapper<TongzhijiluEntity> wrapper = new EntityWrapper<>();
+        Wrapper<TongzhijiluEntity> wrapper = new EntityWrapper<>();
         wrapper.eq("fasongzhuangtai", "待重试");
         wrapper.lt("chongshicishu", 3);
         

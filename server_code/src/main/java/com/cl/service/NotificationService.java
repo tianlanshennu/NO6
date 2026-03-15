@@ -14,6 +14,7 @@ import com.cl.entity.YishengyuyueEntity;
 import com.cl.entity.JiuzhentongzhiEntity;
 import com.cl.dao.TongzhijiluDao;
 import com.cl.dao.JiuzhentongzhiDao;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
 @Service
@@ -171,7 +172,7 @@ public class NotificationService {
     
     @Transactional
     public void retryFailedNotifications() {
-        EntityWrapper<TongzhijiluEntity> wrapper = new EntityWrapper<>();
+        Wrapper<TongzhijiluEntity> wrapper = new EntityWrapper<>();
         wrapper.eq("fasongzhuangtai", "待重试");
         wrapper.lt("chongshicishu", MAX_RETRY_COUNT);
         

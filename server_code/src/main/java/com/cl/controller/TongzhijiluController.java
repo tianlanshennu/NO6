@@ -75,17 +75,15 @@ public class TongzhijiluController {
 	
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-        TongzhijiluEntity tongzhijilu = tongzhijiluService.selectById(id);
-		tongzhijilu = tongzhijiluService.selectView(new EntityWrapper<TongzhijiluEntity>().eq("id", id));
-        return R.ok().put("data", tongzhijilu);
+        TongzhijiluView tongzhijiluView = tongzhijiluService.selectView(new EntityWrapper<TongzhijiluEntity>().eq("id", id));
+        return R.ok().put("data", tongzhijiluView);
     }
 
 	@IgnoreAuth
     @RequestMapping("/detail/{id}")
     public R detail(@PathVariable("id") Long id){
-        TongzhijiluEntity tongzhijilu = tongzhijiluService.selectById(id);
-		tongzhijilu = tongzhijiluService.selectView(new EntityWrapper<TongzhijiluEntity>().eq("id", id));
-        return R.ok().put("data", tongzhijilu);
+        TongzhijiluView tongzhijiluView = tongzhijiluService.selectView(new EntityWrapper<TongzhijiluEntity>().eq("id", id));
+        return R.ok().put("data", tongzhijiluView);
     }
 
     @RequestMapping("/save")
@@ -134,9 +132,9 @@ public class TongzhijiluController {
     @RequestMapping("/countByStatus")
     public R countByStatus(HttpServletRequest request){
         Map<String, Object> result = new HashMap<>();
-        EntityWrapper<TongzhijiluEntity> ewSuccess = new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", "成功");
-        EntityWrapper<TongzhijiluEntity> ewFail = new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", "失败");
-        EntityWrapper<TongzhijiluEntity> ewPending = new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", "待重试");
+        EntityWrapper<TongzhijiluEntity> ewSuccess = (EntityWrapper<TongzhijiluEntity>) new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", "成功");
+        EntityWrapper<TongzhijiluEntity> ewFail = (EntityWrapper<TongzhijiluEntity>) new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", "失败");
+        EntityWrapper<TongzhijiluEntity> ewPending = (EntityWrapper<TongzhijiluEntity>) new EntityWrapper<TongzhijiluEntity>().eq("fasongzhuangtai", "待重试");
         result.put("success", tongzhijiluService.selectCount(ewSuccess));
         result.put("fail", tongzhijiluService.selectCount(ewFail));
         result.put("pending", tongzhijiluService.selectCount(ewPending));
