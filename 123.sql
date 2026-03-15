@@ -272,10 +272,10 @@ CREATE TABLE `tongzhisongji`  (
   `songjizhuangtai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '发送中' COMMENT '发送状态 (发送中/成功/失败/已处理)',
   `retrycount` int(11) NULL DEFAULT 0 COMMENT '重试次数',
   `shibaiyuanyin` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '失败原因',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_songjizhuangtai`(`songjizhuangtai`) USING BTREE,
-  INDEX `idx_tongzhibianhao`(`tongzhibianhao`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '通知发送记录' ROW FORMAT = Dynamic;
+  PRIMARY KEY (`id`),
+  KEY `idx_songjizhuangtai` (`songjizhuangtai`),
+  KEY `idx_tongzhibianhao` (`tongzhibianhao`)
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COMMENT = '通知发送记录';
 
 -- ----------------------------
 -- Records of jiuzhentongzhi
