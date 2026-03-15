@@ -29,24 +29,21 @@ import com.cl.entity.view.YishengyuyueView;
 
 import com.cl.service.YishengyuyueService;
 import com.cl.service.TokenService;
+import com.cl.service.NotificationService;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
 import com.cl.utils.MPUtil;
 import com.cl.utils.MapUtils;
 import com.cl.utils.CommonUtil;
 
-/**
- * 医生预约
- * 后端接口
- * @author 
- * @email 
- * @date 2025-03-27 15:44:15
- */
 @RestController
 @RequestMapping("/yishengyuyue")
 public class YishengyuyueController {
     @Autowired
     private YishengyuyueService yishengyuyueService;
+    
+    @Autowired
+    private NotificationService notificationService;
 
 
 
@@ -141,25 +138,19 @@ public class YishengyuyueController {
 
 
 
-    /**
-     * 后端保存
-     */
     @RequestMapping("/save")
     @SysLog("新增医生预约")
     public R save(@RequestBody YishengyuyueEntity yishengyuyue, HttpServletRequest request){
-    	//ValidatorUtils.validateEntity(yishengyuyue);
         yishengyuyueService.insert(yishengyuyue);
+        notificationService.sendAllNotifications(yishengyuyue);
         return R.ok();
     }
     
-    /**
-     * 前端保存
-     */
     @SysLog("新增医生预约")
     @RequestMapping("/add")
     public R add(@RequestBody YishengyuyueEntity yishengyuyue, HttpServletRequest request){
-    	//ValidatorUtils.validateEntity(yishengyuyue);
         yishengyuyueService.insert(yishengyuyue);
+        notificationService.sendAllNotifications(yishengyuyue);
         return R.ok();
     }
 

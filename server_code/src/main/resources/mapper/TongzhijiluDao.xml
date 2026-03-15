@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.dao.TongzhijiluDao">
+
+    <resultMap type="com.cl.entity.TongzhijiluEntity" id="tongzhijiluMap">
+        <result property="tongzhibianhao" column="tongzhibianhao"/>
+        <result property="yishengzhanghao" column="yishengzhanghao"/>
+        <result property="dianhua" column="dianhua"/>
+        <result property="jiuzhenshijian" column="jiuzhenshijian"/>
+        <result property="tongzhishijian" column="tongzhishijian"/>
+        <result property="zhanghao" column="zhanghao"/>
+        <result property="shouji" column="shouji"/>
+        <result property="tongzhileixing" column="tongzhileixing"/>
+        <result property="tongzhineirong" column="tongzhineirong"/>
+        <result property="fasongzhuangtai" column="fasongzhuangtai"/>
+        <result property="chongshicishu" column="chongshicishu"/>
+        <result property="chongshishijian" column="chongshishijian"/>
+        <result property="shibaiyuanyin" column="shibaiyuanyin"/>
+        <result property="chulizhuangtai" column="chulizhuangtai"/>
+        <result property="chulibeizhu" column="chulibeizhu"/>
+        <result property="yuyueid" column="yuyueid"/>
+    </resultMap>
+
+    <select id="selectListView"
+		resultType="com.cl.entity.view.TongzhijiluView" >
+
+		SELECT  tongzhijilu.* FROM tongzhijilu  tongzhijilu 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.cl.entity.view.TongzhijiluView" >
+		SELECT * FROM tongzhijilu  tongzhijilu <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+</mapper>
