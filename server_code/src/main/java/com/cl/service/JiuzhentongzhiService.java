@@ -26,7 +26,8 @@ public interface JiuzhentongzhiService extends IService<JiuzhentongzhiEntity> {
    	JiuzhentongzhiView selectView(@Param("ew") Wrapper<JiuzhentongzhiEntity> wrapper);
    	
    	PageUtils queryPage(Map<String, Object> params,Wrapper<JiuzhentongzhiEntity> wrapper);
-   	
+
+   	void sendNotificationImmediately(JiuzhentongzhiEntity jiuzhentongzhi);
    
 }
 

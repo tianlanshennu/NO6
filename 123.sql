@@ -253,7 +253,29 @@ CREATE TABLE `jiuzhentongzhi`  (
   `tongzhibeizhu` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '通知备注',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `tongzhibianhao`(`tongzhibianhao`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '就诊通知' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '就诊通知' ROW FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tongzhisongji
+-- ----------------------------
+DROP TABLE IF EXISTS `tongzhisongji`;
+CREATE TABLE `tongzhisongji`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `addtime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `tongzhibianhao` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '通知编号',
+  `yishengzhanghao` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '医生账号',
+  `dianhua` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话',
+  `jiuzhenshijian` datetime(0) NULL DEFAULT NULL COMMENT '就诊时间',
+  `songjishijian` datetime(0) NULL DEFAULT NULL COMMENT '发送时间',
+  `zhanghao` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '账号',
+  `shouji` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '手机',
+  `songjizhuangtai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '发送中' COMMENT '发送状态 (发送中/成功/失败/已处理)',
+  `retrycount` int(11) NULL DEFAULT 0 COMMENT '重试次数',
+  `shibaiyuanyin` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '失败原因',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_songjizhuangtai`(`songjizhuangtai`) USING BTREE,
+  INDEX `idx_tongzhibianhao`(`tongzhibianhao`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '通知发送记录' ROW FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jiuzhentongzhi

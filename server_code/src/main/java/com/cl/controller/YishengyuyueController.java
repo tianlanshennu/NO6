@@ -26,8 +26,10 @@ import com.cl.annotation.SysLog;
 
 import com.cl.entity.YishengyuyueEntity;
 import com.cl.entity.view.YishengyuyueView;
+import com.cl.entity.JiuzhentongzhiEntity;
 
 import com.cl.service.YishengyuyueService;
+import com.cl.service.JiuzhentongzhiService;
 import com.cl.service.TokenService;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
@@ -47,6 +49,9 @@ import com.cl.utils.CommonUtil;
 public class YishengyuyueController {
     @Autowired
     private YishengyuyueService yishengyuyueService;
+    
+    @Autowired
+    private JiuzhentongzhiService jiuzhentongzhiService;
 
 
 
@@ -157,9 +162,25 @@ public class YishengyuyueController {
      */
     @SysLog("新增医生预约")
     @RequestMapping("/add")
+    @Transactional
     public R add(@RequestBody YishengyuyueEntity yishengyuyue, HttpServletRequest request){
     	//ValidatorUtils.validateEntity(yishengyuyue);
         yishengyuyueService.insert(yishengyuyue);
+        
+        try {
+            JiuzhentongzhiEntity notification = new JiuzhentongzhiEntity();
+            notification.setTongzhibianhao(yishengyuyue.getYuyuebianhao());
+            notification.setYishengzhanghao(yishengyuyue.getYishengzhanghao());
+            notification.setDianhua(yishengyuyue.getDianhua());
+            notification.setJiuzhenshijian(yishengyuyue.getYuyueshijian());
+            notification.setZhanghao(yishengyuyue.getZhanghao());
+            notification.setShouji(yishengyuyue.getShouji());
+            notification.setTongzhibeizhu("预约成功，已发送就诊通知");
+            
+            jiuzhentongzhiService.sendNotificationImmediately(notification);
+        } catch (Exception e) {
+        }
+        
         return R.ok();
     }
 
