@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.dao.TongzhisongjiDao">
+
+    <resultMap type="com.cl.entity.TongzhisongjiEntity" id="tongzhisongjiMap">
+        <result property="tongzhibianhao" column="tongzhibianhao"/>
+        <result property="yishengzhanghao" column="yishengzhanghao"/>
+        <result property="dianhua" column="dianhua"/>
+        <result property="jiuzhenshijian" column="jiuzhenshijian"/>
+        <result property="songjishijian" column="songjishijian"/>
+        <result property="zhanghao" column="zhanghao"/>
+        <result property="shouji" column="shouji"/>
+        <result property="songjizhuangtai" column="songjizhuangtai"/>
+        <result property="retrycount" column="retrycount"/>
+        <result property="shibaiyuanyin" column="shibaiyuanyin"/>
+    </resultMap>
+
+    <select id="selectListView"
+		resultType="com.cl.entity.view.TongzhisongjiView" >
+
+		SELECT  tongzhisongji.* FROM tongzhisongji  tongzhisongji 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.cl.entity.view.TongzhisongjiView" >
+		SELECT * FROM tongzhisongji  tongzhisongji <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+</mapper>
