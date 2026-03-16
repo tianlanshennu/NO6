@@ -3,10 +3,12 @@ package com.cl.service.impl;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.List;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cl.utils.PageUtils;
 import com.cl.utils.Query;
@@ -16,6 +18,7 @@ import com.cl.dao.TongzhisongjiDao;
 import com.cl.entity.TongzhisongjiEntity;
 import com.cl.service.TongzhisongjiService;
 import com.cl.entity.view.TongzhisongjiView;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("tongzhisongjiService")
 public class TongzhisongjiServiceImpl extends ServiceImpl<TongzhisongjiDao, TongzhisongjiEntity> implements TongzhisongjiService {
@@ -33,7 +36,8 @@ public class TongzhisongjiServiceImpl extends ServiceImpl<TongzhisongjiDao, Tong
     @Override
 	public PageUtils queryPage(Map<String, Object> params, Wrapper<TongzhisongjiEntity> wrapper) {
 		  Page<TongzhisongjiView> page =new Query<TongzhisongjiView>(params).getPage();
-	        page.setRecords(baseMapper.selectListView(page,wrapper));
+	        List<TongzhisongjiView> list = baseMapper.selectListView((Pagination)page, wrapper);
+	        page.setRecords(list);
 	    	PageUtils pageUtil = new PageUtils(page);
 	    	return pageUtil;
  	}

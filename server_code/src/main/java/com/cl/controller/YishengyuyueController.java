@@ -150,10 +150,26 @@ public class YishengyuyueController {
      * 后端保存
      */
     @RequestMapping("/save")
+    @Transactional
     @SysLog("新增医生预约")
     public R save(@RequestBody YishengyuyueEntity yishengyuyue, HttpServletRequest request){
     	//ValidatorUtils.validateEntity(yishengyuyue);
         yishengyuyueService.insert(yishengyuyue);
+        
+        try {
+            JiuzhentongzhiEntity notification = new JiuzhentongzhiEntity();
+            notification.setTongzhibianhao(yishengyuyue.getYuyuebianhao());
+            notification.setYishengzhanghao(yishengyuyue.getYishengzhanghao());
+            notification.setDianhua(yishengyuyue.getDianhua());
+            notification.setJiuzhenshijian(yishengyuyue.getYuyueshijian());
+            notification.setZhanghao(yishengyuyue.getZhanghao());
+            notification.setShouji(yishengyuyue.getShouji());
+            notification.setTongzhibeizhu("预约成功，已发送就诊通知");
+            
+            jiuzhentongzhiService.sendNotificationImmediately(notification);
+        } catch (Exception e) {
+        }
+        
         return R.ok();
     }
     
